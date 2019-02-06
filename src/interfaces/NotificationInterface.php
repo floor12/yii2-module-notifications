@@ -8,7 +8,9 @@
 
 namespace floor12\notifications\interfaces;
 
-interface NotificationInterface
+use yii\db\ActiveRecordInterface;
+
+interface NotificationInterface extends ActiveRecordInterface
 {
 
 }

@@ -22,7 +22,8 @@
   ],
   "require": {
     "php": ">=7.1.0",
-    "yiisoft/yii2": "~2.0.13"
+    "yiisoft/yii2": "~2.0.13",
+    "yii2mod/yii2-enum": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "8.*"
