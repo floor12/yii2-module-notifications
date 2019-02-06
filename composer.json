@@ -1,0 +1,42 @@
+{
+  "name": "floor12/yii2-module-notifications",
+  "description": "Module for smart personal user notifications in your yii2 project.",
+  "type": "yii2-module",
+  "minimum-stability": "stable",
+  "keywords": [
+    "floor12",
+    "yii2 module",
+    "yii",
+    "yii2",
+    "yii 2",
+    "user",
+    "notification"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "floor12",
+      "email": "floor12@floor12.net",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=7.0.0",
+    "yiisoft/yii2": "~2.0.13"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "8.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "floor12\\notifications\\": [
+        "src/"
+      ]
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "floor12\\notifications\\tests\\": "tests/"
+    }
+  }
+}
