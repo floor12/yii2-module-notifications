@@ -17,12 +17,15 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
 
+$this->title = Yii::t('app.f12.notifications', 'Notifications');
+$this->params['breadcrumbs'][] = $this->title;
+
 $form = ActiveForm::begin([
     'method' => 'GET',
     'options' => ['class' => 'autosubmit', 'data-container' => '#items'],
     'enableClientValidation' => false,
 ]); ?>
-    <h1><?= Yii::t('app.f12.notifications', 'Notifications') ?></h1>
+    <h1><?= $this->title ?></h1>
     <div class="filter-block">
         <div class="row">
             <div class="col-md-9">
