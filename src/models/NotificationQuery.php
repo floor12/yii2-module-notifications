@@ -2,17 +2,31 @@
 
 namespace floor12\notifications\models;
 
+use floor12\notifications\interfaces\NotificationQueryInterface;
+use yii\db\ActiveQuery;
+
 /**
- * This is the ActiveQuery class for [[Notification]].
+ * This is the ActiveQuery class for Notification.
  *
  * @see Notification
  */
-class NotificationQuery extends \yii\db\ActiveQuery
+class NotificationQuery extends ActiveQuery implements NotificationQueryInterface
 {
-    /*public function active()
+    /**
+     * @return NotificationQuery
+     */
+    public function byOwner(int $owner_id)
     {
-        return $this->andWhere('[[status]]=1');
-    }*/
+        return $this->andWhere(['owner_id' => $owner_id]);
+    }
+
+    /**
+     * @return NotificationQuery
+     */
+    public function unreaded()
+    {
+        return $this->andWhere('ISNULL(readed)');
+    }
 
     /**
      * {@inheritdoc}

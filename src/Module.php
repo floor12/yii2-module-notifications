@@ -16,6 +16,7 @@ class Module extends \yii\base\Module
      */
     public $layout = '@app/views/layouts/main';
 
+    public $userRole = '@';
     /**
      * @var string Default notification model
      */
@@ -40,10 +41,13 @@ class Module extends \yii\base\Module
     public function registerTranslations()
     {
         $i18n = Yii::$app->i18n;
-        $i18n->translations['notifications'] = [
+        $i18n->translations['app.f12.notifications'] = [
             'class' => 'yii\i18n\PhpMessageSource',
             'sourceLanguage' => 'en-US',
             'basePath' => '@vendor/floor12/yii2-module-notifications/src/messages',
+            'fileMap' => [
+                'app.f12.notifications' => 'notifications.php',
+            ],
         ];
     }
 }

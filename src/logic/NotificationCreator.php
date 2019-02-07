@@ -19,8 +19,6 @@ use yii\web\IdentityInterface;
 
 class NotificationCreator
 {
-    const TIMEOUT = 60;
-
     /**
      * @var array
      */

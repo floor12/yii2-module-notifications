@@ -25,7 +25,7 @@ class m190206_230000_create_notification extends Migration
             'body' => $this->text()->notNull()->comment('Notification body'),
             'url' => $this->string(255)->null()->comment('URL to watch additinal information'),
             'image' => $this->string(255)->null()->comment('Optional image'),
-            'created' => $this->integer()->notNull()->comment('Creation timestamp'),
+            'created' => $this->integer()->notNull()->comment('Date adn time'),
             'readed' => $this->integer()->null()->comment('Timestamp of reading'),
             'mailed' => $this->integer()->null()->comment('Timestamp of mailing'),
             'email' => $this->string(255)->null()->comment('Address of mailing'),

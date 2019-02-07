@@ -5,6 +5,7 @@ namespace floor12\notifications\models;
 use floor12\notifications\interfaces\NotificationInterface;
 use Yii;
 use yii\db\ActiveRecord;
+use yii\helpers\StringHelper;
 
 /**
  * This is the model class for table "notification".
@@ -15,7 +16,7 @@ use yii\db\ActiveRecord;
  * @property string $body Notification body
  * @property string $url URL to watch additinal information
  * @property string $image Optional image
- * @property string $created Creation timestamp
+ * @property string $created Date and time
  * @property int $readed Timestamp of reading
  * @property int $mailed Timestamp of mailing
  * @property string $email Address of mailing
@@ -56,7 +57,7 @@ class Notification extends ActiveRecord implements NotificationInterface
             'body' => Yii::t('app.f12.notifications', 'Notification body'),
             'url' => Yii::t('app.f12.notifications', 'URL to watch additinal information'),
             'image' => Yii::t('app.f12.notifications', 'Optional image'),
-            'created' => Yii::t('app.f12.notifications', 'Creation timestamp'),
+            'created' => Yii::t('app.f12.notifications', 'Date and time'),
             'readed' => Yii::t('app.f12.notifications', 'Timestamp of reading'),
             'mailed' => Yii::t('app.f12.notifications', 'Timestamp of mailing'),
             'email' => Yii::t('app.f12.notifications', 'Address of mailing'),
@@ -71,4 +72,22 @@ class Notification extends ActiveRecord implements NotificationInterface
     {
         return new NotificationQuery(get_called_class());
     }
+
+    /**
+     * @param int $count Number of words to truncate notification body
+     * @return string Trancated body of notification
+     */
+    public function getBodyTrancated(int $count)
+    {
+        return StringHelper::truncateWords($this->body, $count);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isUnreaded()
+    {
+        return boolval(!$this->readed);
+    }
+
 }

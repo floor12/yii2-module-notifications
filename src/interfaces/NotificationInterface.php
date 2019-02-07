@@ -12,5 +12,20 @@ use yii\db\ActiveRecordInterface;
 
 interface NotificationInterface extends ActiveRecordInterface
 {
+    /**
+     * @return NotificationQueryInterface
+     */
+    public static function find();
 
+    /**
+     * @param int $count Number of words to truncate notification body
+     * @return string Trancated body of notification
+     */
+
+    public function getBodyTrancated(int $count);
+
+    /**
+     * @return bool
+     */
+    public function isUnreaded();
 }
