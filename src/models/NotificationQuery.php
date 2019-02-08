@@ -29,6 +29,14 @@ class NotificationQuery extends ActiveQuery implements NotificationQueryInterfac
     }
 
     /**
+     * @return NotificationQuery
+     */
+    public function unmailed()
+    {
+        return $this->andWhere('ISNULL(mailed)');
+    }
+
+    /**
      * {@inheritdoc}
      * @return Notification[]|array
      */

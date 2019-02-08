@@ -25,7 +25,17 @@ interface NotificationInterface extends ActiveRecordInterface
     public function getBodyTrancated(int $count);
 
     /**
-     * @return bool
+     * @return bool Is current notification is not readed
      */
     public function isUnreaded();
+
+    /**
+     * @return bool Is current notification was send to owner email
+     */
+    public function isEmailed();
+
+    /**
+     * @return NotificationOwnerInterface Owner of current notification
+     */
+    public function getOwner();
 }

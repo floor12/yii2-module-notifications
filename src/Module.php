@@ -18,9 +18,13 @@ class Module extends \yii\base\Module
 
     public $userRole = '@';
     /**
-     * @var string Default notification model
+     * @var string Default notification model classname
      */
-    public $notificationModel = 'floor12\notifications\models\Notification';
+    public $notificationClass = 'floor12\notifications\models\Notification';
+    /**
+     * @var string Default notification owner classname
+     */
+    public $notificationOwnerClass = '\app\models\User';
 
     /**
      * @var int Timeout to not repeat identical notifications

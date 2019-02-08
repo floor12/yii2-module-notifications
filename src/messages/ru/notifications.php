@@ -26,7 +26,9 @@ return [
     'Notification view' => 'Просмотр уведомления',
     'Close' => 'Закрыть',
     'This notifications is already readed.' => 'Это уведомление уже прочитано.',
-    '' => '',
+    'This notifications is send to owner email.' => 'Это уведомление уже отправлено на почту.',
+    'Click this link to see more.' => 'Для просмотра подробностей нажмите на эту ссылку.',
+    'You have new notification' => 'Вы получили новое уведомление',
     '' => '',
     '' => '',
 ];

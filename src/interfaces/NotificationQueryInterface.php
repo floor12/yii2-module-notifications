@@ -21,4 +21,9 @@ interface NotificationQueryInterface extends ActiveQueryInterface
      * @return NotificationQuery
      */
     public function unreaded();
+
+    /**
+     * @return NotificationQuery
+     */
+    public function unmailed();
 }

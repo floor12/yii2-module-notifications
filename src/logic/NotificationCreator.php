@@ -10,12 +10,12 @@ namespace floor12\notifications\logic;
 
 
 use floor12\notifications\interfaces\NotificationInterface;
+use floor12\notifications\interfaces\NotificationOwnerInterface;
 use floor12\notifications\models\NotificationType;
 use Yii;
 use yii\base\ErrorException;
 use yii\base\InvalidConfigException;
 use yii\base\InvalidParamException;
-use yii\web\IdentityInterface;
 
 class NotificationCreator
 {
@@ -48,9 +48,9 @@ class NotificationCreator
      */
     protected $created;
     /**
-     * @var IdentityInterface
+     * @var NotificationOwnerInterface
      */
-    protected $identity;
+    protected $sender;
 
     /**
      * NotificationCreator constructor.
@@ -85,7 +85,7 @@ class NotificationCreator
         foreach ($this->recipient_ids as $recipient_id) {
 
             // Skip author of current notification
-            if ($this->identity && $recipient_id == $this->identity->getId())
+            if ($this->sender && $recipient_id == $this->sender->getId())
                 continue;
 
             // Skip if previous identical unreaded notification exists
@@ -139,12 +139,12 @@ class NotificationCreator
 
         $this->type = array_key_exists('type', $params) ? $params['type'] : NotificationType::INFO;
 
-        $this->classname = array_key_exists('class', $params) ? $params['class'] : Yii::$app->getModule('notifications')->notificationModel;
+        $this->classname = array_key_exists('class', $params) ? $params['class'] : Yii::$app->getModule('notifications')->notificationClass;
 
-        $this->identity = array_key_exists('identity', $params) ? $params['identity'] : NULL;
+        $this->sender = array_key_exists('sender', $params) ? $params['sender'] : NULL;
 
-        if ($this->identity && !is_subclass_of($this->identity, IdentityInterface::class)) {
-            throw new InvalidParamException('Identity passed to NotificationCreator must implements IdentityInterface');
+        if ($this->sender && !is_subclass_of($this->sender, NotificationOwnerInterface::class)) {
+            throw new InvalidParamException('Sender passed to NotificationCreator must implements NotificationOwnerInterface');
         }
 
         $reflection = new \ReflectionClass($this->classname);

@@ -3,7 +3,10 @@
 namespace floor12\notifications\models;
 
 use floor12\notifications\interfaces\NotificationInterface;
+use floor12\notifications\interfaces\NotificationOwnerInterface;
 use Yii;
+use yii\base\InvalidParamException;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\helpers\StringHelper;
 
@@ -20,6 +23,9 @@ use yii\helpers\StringHelper;
  * @property int $readed Timestamp of reading
  * @property int $mailed Timestamp of mailing
  * @property string $email Address of mailing
+ *
+ * @property NotificationOwnerInterface $owner Owner object
+ *
  */
 class Notification extends ActiveRecord implements NotificationInterface
 {
@@ -90,4 +96,25 @@ class Notification extends ActiveRecord implements NotificationInterface
         return boolval(!$this->readed);
     }
 
+    /**
+     * @return bool Is current notification was send to owner email
+     */
+    public function isEmailed()
+    {
+        return boolval($this->mailed);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getOwner()
+    {
+        $owner_class = Yii::$app->getModule('notifications')->notificationOwnerClass;
+
+        $reflection = new \ReflectionClass($owner_class);
+        if (!$reflection->implementsInterface(NotificationOwnerInterface::class))
+            throw new InvalidParamException("{$owner_class} must implements NotificationOwnerInterface");
+
+        return $owner_class::findOne($this->owner_id);
+    }
 }
