@@ -33,7 +33,7 @@ class NotificationFilter extends Model implements FilterModelInterface
     /**
      * @var string
      */
-    protected $notificationModel;
+    protected $notificationClass;
 
     /**
      * @inheritdoc
@@ -43,7 +43,7 @@ class NotificationFilter extends Model implements FilterModelInterface
         if (!Yii::$app->getModule('notifications'))
             throw new InvalidConfigException('Notification module is not registred in this application.');
 
-        $this->notificationModel = Yii::$app->getModule('notifications')->notificationModel;
+        $this->notificationClass = Yii::$app->getModule('notifications')->notificationClass;
     }
 
     /**
@@ -68,7 +68,7 @@ class NotificationFilter extends Model implements FilterModelInterface
         /**
          * @var NotificationQueryInterface
          */
-        $this->query = $this->notificationModel::find()
+        $this->query = $this->notificationClass::find()
             ->andFilterWhere(['LIKE', 'body', $this->filter]);
 
         if ($this->unreaded)
