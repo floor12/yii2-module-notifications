@@ -16,7 +16,7 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\web\BadRequestHttpException;
 
-class NotificationFilter extends Model implements FilterModelInterface
+class NotificationAdminFilter extends Model implements FilterModelInterface
 {
     /**
      * @var string
@@ -69,7 +69,6 @@ class NotificationFilter extends Model implements FilterModelInterface
          * @var NotificationQueryInterface
          */
         $this->query = $this->notificationClass::find()
-            ->andWhere(['owner_id' => Yii::$app->user->identity->getId()])
             ->andFilterWhere(['LIKE', 'body', $this->filter]);
 
         if ($this->unreaded)

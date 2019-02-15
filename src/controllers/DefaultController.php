@@ -11,6 +11,7 @@ namespace floor12\notifications\controllers;
 use floor12\editmodal\IndexAction;
 use floor12\notifications\logic\NotificationReader;
 use floor12\notifications\models\Notification;
+use floor12\notifications\models\NotificationAdminFilter;
 use floor12\notifications\models\NotificationFilter;
 use Yii;
 use yii\filters\AccessControl;
@@ -30,7 +31,13 @@ class DefaultController extends \yii\web\Controller
                 'rules' => [
                     [
                         'allow' => true,
+                        'actions' => ['index', 'view'],
                         'roles' => [Yii::$app->getModule('notifications')->userRole],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['admin', 'view'],
+                        'roles' => [Yii::$app->getModule('notifications')->adminRole],
                     ],
                 ],
             ],
@@ -80,6 +87,11 @@ class DefaultController extends \yii\web\Controller
             'index' => [
                 'class' => IndexAction::class,
                 'model' => NotificationFilter::class,
+            ],
+            'admin' => [
+                'class' => IndexAction::class,
+                'model' => NotificationAdminFilter::class,
+                'view' => 'index_admin'
             ],
         ];
     }

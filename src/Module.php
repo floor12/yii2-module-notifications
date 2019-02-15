@@ -10,13 +10,18 @@ class Module extends \yii\base\Module
      * @inheritdoc
      */
     public $controllerNamespace = 'floor12\notifications\controllers';
-
     /**
      * @var string Default controller layout
      */
     public $layout = '@app/views/layouts/main';
-
+    /**
+     * @var string User role to read own notifications
+     */
     public $userRole = '@';
+    /**
+     * @var string User role to read notifications of all users
+     */
+    public $adminRole = 'admin';
     /**
      * @var string Default notification model classname
      */
@@ -30,7 +35,6 @@ class Module extends \yii\base\Module
      * @var int Timeout to not repeat identical notifications
      */
     public $timeoutRepeat = 60 * 10; // 10 min
-
     /**
      * @inheritdoc
      */
@@ -38,7 +42,6 @@ class Module extends \yii\base\Module
     {
         $this->registerTranslations();
     }
-
     /**
      *  Register i18n language files
      */
