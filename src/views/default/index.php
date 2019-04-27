@@ -28,14 +28,17 @@ $form = ActiveForm::begin([
     <h1><?= $this->title ?></h1>
     <div class="filter-block">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-6">
                 <?= $form->field($model, 'filter')->label(false)->textInput([
                     'placeholder' => Yii::t('app.f12.notifications', 'Search in notifications'),
                     'autofocus' => true
                 ]) ?>
             </div>
-            <div class="col-md-3" style="padding-top: 5px;">
+            <div class="col-md-4" style="padding-top: 5px;">
                 <?= $form->field($model, 'unreaded')->checkbox() ?>
+            </div>
+            <div class="col-md-2">
+                <?= Html::a('Прочитать все', ['read'], ['class' => 'btn btn-primary']) ?>
             </div>
         </div>
     </div>
@@ -51,7 +54,7 @@ Pjax::begin(['id' => 'items']); ?>
     'layout' => '{items}{pager}{summary}',
     'rowOptions' => function (NotificationInterface $model) {
         if ($model->isUnreaded())
-            return ['style' => 'font-weight:bold;'];
+            return ['class' => 'notification-unreaded'];
     },
     'tableOptions' => ['class' => 'table'],
     'columns' => [

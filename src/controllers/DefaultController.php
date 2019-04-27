@@ -9,6 +9,7 @@
 namespace floor12\notifications\controllers;
 
 use floor12\editmodal\IndexAction;
+use floor12\notifications\logic\NotificationReadAll;
 use floor12\notifications\logic\NotificationReader;
 use floor12\notifications\models\Notification;
 use floor12\notifications\models\NotificationAdminFilter;
@@ -31,7 +32,7 @@ class DefaultController extends \yii\web\Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view'],
+                        'actions' => ['index', 'view', 'read'],
                         'roles' => [Yii::$app->getModule('notifications')->userRole],
                     ],
                     [
@@ -57,6 +58,16 @@ class DefaultController extends \yii\web\Controller
     public function init()
     {
         $this->layout = Yii::$app->getModule('notifications')->layout;
+    }
+
+    /**
+     * @return \yii\web\Response
+     */
+    public function actionRead()
+    {
+        $reader = new NotificationReadAll(Yii::$app->user->identity);
+        $reader->execute();
+        return $this->redirect('index');
     }
 
     /**

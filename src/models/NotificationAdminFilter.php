@@ -90,4 +90,5 @@ class NotificationAdminFilter extends Model implements FilterModelInterface
             'unreaded' => Yii::t('app.f12.notifications', 'show only unreaded notifications')
         ];
     }
+
 }
